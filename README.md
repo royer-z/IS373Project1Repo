@@ -4,17 +4,17 @@ WordPress Installation:
 1. Install PHP
     1. [Download Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
         1. Scroll to and click red download button
-        2. Select an option according to your system and click next
+        2. Select an option according to your system and click "next"
         3. Your download will start. When finished, click it and follow its instructions
     2. [Download PHP](https://windows.php.net/download/)
-        1. Click on the Zip link according to your system
-        2. Your download will start. When finished, extract its contents into your C:\PHP7 directory
-    3. Create and configure your php.ini file
-        1. In your C:\PHP7 directory, create a file named php.ini
-        2. Find a file named php.ini-development and copy its content into your php.ini file
-        3. Edit php.ini file
-            1. edit memory_limit from 128M to 1G
-            2. edit max_execution_time to at least 90
+        1. Click on the "Zip" link according to your system
+        2. Your download will start. When finished, extract its contents into your "C:\PHP7" directory
+    3. Create and configure your "php.ini" file
+        1. In your "C:\PHP7" directory, create a file named "php.ini"
+        2. Find a file named "php.ini-development" and copy its content into your "php.ini" file
+        3. Edit "php.ini" file
+            1. edit "memory_limit" from "128M" to "1G"
+            2. edit "max_execution_time" to at least "90"
             3. uncomment (delete the ;) the following lines:
                 - ; extension_dir = "ext"
                 - ; extension=php_gd2.dll
@@ -25,8 +25,8 @@ WordPress Installation:
                 - ; extension=php_pdo_sqlite.dll
                 - ; extension=php_sockets.dll
                 - ; extension=php_mysqli.dll
-    4. Add C:\PHP7 to your Windows system path
-        1. Open your System Control Panel
+    4. Add "C:\PHP7" to your Windows system path
+        1. Open your "System Control Panel"
         2. Click "System"
         3. On the left side, click "Advaced system settings"
         4. By the bottom, click "Environment Variables"
@@ -45,3 +45,54 @@ WordPress Installation:
         4. Check if Composer installation is successful
             1. Reopen your "Command Prompt" and type "composer"
             2. You should see a text graphic, a list of help options, and a list of commands
+3. Install MySQL Server
+    1. [Download MySQL Installer](https://dev.mysql.com/downloads/installer/)
+        1. Scroll down to find the 16.4M version and click the "Download" button
+        2. You can click login, sign up, or skip
+        3. Your download will start. When finished, run it
+    2. MySQL Installer
+        1. Agree to permissions and its License Agreement. Click "Next"
+        2. Select "Server only" and click "Next"
+        3. Click "Execute" and your installation will start. When finished, click "Next" and "Next" again
+        4. Then select "Standalone MySQL Server / Classic MySQL Replication" and click "Next", "Next", and "Next" again
+        5. For "MySQL Root Password" use "password" and click "Next" and "Next" again
+        6. Click "Execute" and, when finished, "Finished"
+        7. Click "Next" and "Finish"
+4. Create a database
+    1. In PHP Storm, click on the "Database" tab located on the right most column of the IDE
+    2. Click on the plus icon to dropdown its options
+    3. Hover over "Data Source" and click "MySQL"
+    4. For "User", type "root", for "Password", type "password", and for "Port", make sure it is "3306"
+    5. Before clicking "Apply" or "Okay", click on "Download missing driver files"
+    6. Then click "Apply" and "Okay"
+    7. Enter these commands into the SQL command window
+        1. CREATE DATABASE wordpress;
+        2. CREATE USER 'YOURNAME'@'wordpress' IDENTIFIED WITH mysql_native_password BY 'YOURPASSWORD';
+        3. GRANT ALL PRIVILEGES ON wordpress.* TO 'YOURNAME'@'wordpress';
+        4. FLUSH PRIVILEGES;
+    8. You can use this command to check your database
+        - SHOW DATABASES;
+5. Install WordPress
+    1. [Download WordPress](https://wordpress.org/download/)
+        1. Click the "Download WordPress 5.0.3" button
+        2. Your download will start. When finished, extract the files into your PHP Storm project directory "PHPstormProjects"
+    2. Configure your "wp-config.php" file
+        1. Open the extracted directory in PHP Storm, located in "PHPstormProjects", and create a new file named "wp-config.php"
+        2. Find the file "wp-config-sample.php" and copy its content into the file named "wp-config.php"
+        3. Open and edit the "wp-config.php" file's "MySQL settings" such as the database name, user name, and password
+    3. Add Configuration
+        1. In PHP Storm, click on "Add Configuration..."
+        2. Click on the plus icon to dropdown its options
+        3. Click on "PHP Built-in Web Server"
+        4. Click "Apply" and "Okay"
+    4. Enable "WordPress Support" to get better error messages
+        1. This is enabled by default
+        2. If disabled, go to "Plugins settings" and enabled it there
+6. Run the server
+    1. Click on "Run" button, located next to the "Add Configuration..." button
+    2. Open your browser and type "localhost" as the URL
+    3. The WordPress account creator should display and create an account
+    4. If an error is displayed, your can check if you are using the correct "php.ini" file
+        1. Create a "test.php" file in your wordpress directory
+        2. In "test.php", echo the function called "phpinfo()"
+        3. Then in your browser type "localhost/test.php" to see where "php.ini" is being loaded
